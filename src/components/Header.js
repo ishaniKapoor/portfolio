@@ -12,28 +12,28 @@ import { Box, HStack } from "@chakra-ui/react";
 const socials = [
   {
     icon: faEnvelope,
-    url: "mailto: hello@example.com",
+    url: "mailto: ishani_kaps@hotmail.com",
   },
   {
     icon: faGithub,
-    url: "https://github.com",
+    url: "https://github.com/ishaniKapoor",
   },
   {
     icon: faLinkedin,
-    url: "https://www.linkedin.com",
-  },
-  {
-    icon: faMedium,
-    url: "https://medium.com",
-  },
-  {
-    icon: faStackOverflow,
-    url: "https://stackoverflow.com",
+    url: "http://www.linkedin.com/in/ishani-kapoor-571412178",
   },
 ];
 
+const sections = [
+  {id: 'landing', label: 'Home'},
+  {id: 'experience', label: 'Experience'},
+  //{id: 'projects', label: 'Projects'}
+]
+
 const Header = () => {
-  const handleClick = (anchor) => () => {
+  const handleClick = (anchor) => (e) => {
+    e.preventDefault();
+
     const id = `${anchor}-section`;
     const element = document.getElementById(id);
     if (element) {
@@ -64,7 +64,6 @@ const Header = () => {
           alignItems="center"
         >
           <nav>
-            {/* Add social media links based on the `socials` data */}
             <HStack>
               <a href={socials[0].url}>
                 <FontAwesomeIcon icon={socials[0].icon} size="2x">
@@ -78,21 +77,20 @@ const Header = () => {
                 <FontAwesomeIcon icon={socials[2].icon} size="2x">
                 </FontAwesomeIcon>
               </a>
-              <a href={socials[3].url}>
-                <FontAwesomeIcon icon={socials[3].icon} size="2x">
-                </FontAwesomeIcon>
-              </a>
-              <a href={socials[4].url}>
-                <FontAwesomeIcon icon={socials[4].icon} size="2x">
-                </FontAwesomeIcon>
-              </a>
             </HStack>
           </nav>
           <nav>
             <HStack spacing={8}>
-              {/* Add links to Projects and Contact me section */}
-              <a href="/#projects" id="projects-section" onClick={handleClick}>Projects</a>
-              <a href="/#contact-me" id="contactme-section" onClick={handleClick}>Contact me</a>
+              {sections.map((section) => (
+                <a 
+                key={section.id}
+                href={`#${section.id}`}
+                onClick={handleClick(section.id)}
+                style={{ cursor: "pointer", textDecoration: "none", color: "white" }}
+                >
+                {section.label}
+                </a>
+              ))}
             </HStack>
           </nav>
         </HStack>
