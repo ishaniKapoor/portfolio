@@ -18,7 +18,7 @@ const LandingSection = () => (
     justifyContent="center"
     alignItems="center"
     isDarkBackground
-    background="linear-gradient(135deg, #1E2A38 0%, #2A4365 100%)"
+    background="linear-gradient(135deg, #1A1A1A 0%,rgb(16, 32, 54) 100%)"
     textAlign="center"
     width="100vw"
     minH="100vh"

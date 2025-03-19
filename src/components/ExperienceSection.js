@@ -1,46 +1,42 @@
 import React from "react";
 import FullScreenSection from "./FullScreenSection";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, VStack } from "@chakra-ui/react";
 import Card from "./Card";
 
 const experiences = [
   {
     title: "Full Stack Developer",
-    description:
-      "Handy tool belt to create amazing AR components in a React app, with redux integration via middleware️",
+    description: "Building UI components for GM's Over-the-Air platform. Collaborating with clients and engineers in an agile environment.",
+    languages: ["Angular", "HTML", "CSS", "Java", "Azure"],
   },
   {
     title: "Software Developer",
-    description:
-      "A scrollable bottom sheet with virtualisation support, native animations at 60 FPS and fully implemented in JS land 🔥️",
+    description: "Developed supplier content display components and optimized UI for better accessibility.",
+    languages: ["Angular", "HTML", "CSS", "Java"],
   },
 ];
 
 const ExperienceSection = () => {
   return (
     <FullScreenSection
-      backgroundColor="#14532d"
+      justifyContent="center"
+      alignItems="center"
       isDarkBackground
+      background="linear-gradient(135deg, #1A1A1A 0%,rgb(16, 32, 54) 100%)"
+      textAlign="center"
+      width="100vw"
+      minH="100vh"
+      px={{ base: 4, md: 8, lg: 16 }} 
       p={8}
-      alignItems="flex-start"
-      spacing={8}
     >
-      <Heading as="h1" id="experience-section">
+      <Heading as="h1" id="experience-section" color="white" mb={6}>
         Experience
       </Heading>
-      <Box
-        display="grid"
-        gridTemplateColumns="repeat(2,minmax(0,1fr))"
-        gridGap={8}
-      >
+      <VStack spacing={6} width="100%" maxW="800px">
         {experiences.map((experience) => (
-          <Card
-            key={experience.title}
-            title={experience.title}
-            description={experience.description}
-          />
+          <Card key={experience.title} {...experience} />
         ))}
-      </Box>
+      </VStack>
     </FullScreenSection>
   );
 };
