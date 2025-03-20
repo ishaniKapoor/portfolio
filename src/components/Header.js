@@ -1,12 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import {
-  faGithub,
-  faLinkedin,
-  faMedium,
-  faStackOverflow,
-} from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { Box, HStack } from "@chakra-ui/react";
 
 const socials = [
@@ -25,10 +20,9 @@ const socials = [
 ];
 
 const sections = [
-  {id: 'landing', label: 'Home'},
-  {id: 'experience', label: 'Experience'},
-  //{id: 'projects', label: 'Projects'}
-]
+  { id: "landing", label: "Home" },
+  { id: "experience", label: "Experience" },
+];
 
 const Header = () => {
   const handleClick = (anchor) => (e) => {
@@ -50,45 +44,38 @@ const Header = () => {
       top={0}
       left={0}
       right={0}
-      translateY={0}
-      transitionProperty="transform"
-      transitionDuration=".3s"
-      transitionTimingFunction="ease-in-out"
       backgroundColor="#18181b"
+      zIndex={1000}
     >
       <Box color="white" maxWidth="1280px" margin="0 auto">
         <HStack
-          px={16}
+          px={{ base: 4, md: 16 }}
           py={4}
           justifyContent="space-between"
           alignItems="center"
         >
+          {/* Social Media Icons */}
           <nav>
-            <HStack>
-              <a href={socials[0].url}>
-                <FontAwesomeIcon icon={socials[0].icon} size="2x">
-                </FontAwesomeIcon>
-              </a>
-              <a href={socials[1].url}>
-                <FontAwesomeIcon icon={socials[1].icon} size="2x">
-                </FontAwesomeIcon>
-              </a>
-              <a href={socials[2].url}>
-                <FontAwesomeIcon icon={socials[2].icon} size="2x">
-                </FontAwesomeIcon>
-              </a>
+            <HStack spacing={{ base: 3, md: 4 }}>
+              {socials.map((social, index) => (
+                <a key={index} href={social.url}>
+                  <FontAwesomeIcon icon={social.icon} size="lg" />
+                </a>
+              ))}
             </HStack>
           </nav>
+
+          {/* Navigation Links */}
           <nav>
-            <HStack spacing={8}>
+            <HStack spacing={{ base: 4, md: 8 }}>
               {sections.map((section) => (
-                <a 
-                key={section.id}
-                href={`#${section.id}`}
-                onClick={handleClick(section.id)}
-                style={{ cursor: "pointer", textDecoration: "none", color: "white" }}
+                <a
+                  key={section.id}
+                  href={`#${section.id}`}
+                  onClick={handleClick(section.id)}
+                  style={{ cursor: "pointer", textDecoration: "none", color: "white" }}
                 >
-                {section.label}
+                  {section.label}
                 </a>
               ))}
             </HStack>
@@ -98,4 +85,5 @@ const Header = () => {
     </Box>
   );
 };
+
 export default Header;
