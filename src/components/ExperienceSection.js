@@ -1,7 +1,7 @@
 import React from "react";
 import FullScreenSection from "./FullScreenSection";
-import { Box, Heading, VStack } from "@chakra-ui/react";
-import Card from "./Card";
+import { Heading, VStack } from "@chakra-ui/react";
+import CardExperience from "./CardExperience";
 
 const experiences = [
   {
@@ -34,7 +34,7 @@ const ExperienceSection = () => {
       </Heading>
       <VStack spacing={6} width="100%" maxW="800px">
         {experiences.map((experience) => (
-          <Card key={experience.title} {...experience} />
+          <CardExperience key={experience.title} {...experience} />
         ))}
       </VStack>
     </FullScreenSection>

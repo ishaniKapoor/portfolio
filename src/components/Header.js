@@ -22,6 +22,7 @@ const socials = [
 const sections = [
   { id: "landing", label: "Home" },
   { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects"}
 ];
 
 const Header = () => {
@@ -54,7 +55,6 @@ const Header = () => {
           justifyContent="space-between"
           alignItems="center"
         >
-          {/* Social Media Icons */}
           <nav>
             <HStack spacing={{ base: 3, md: 4 }}>
               {socials.map((social, index) => (
@@ -64,8 +64,6 @@ const Header = () => {
               ))}
             </HStack>
           </nav>
-
-          {/* Navigation Links */}
           <nav>
             <HStack spacing={{ base: 4, md: 8 }}>
               {sections.map((section) => (

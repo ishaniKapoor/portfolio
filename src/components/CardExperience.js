@@ -1,7 +1,7 @@
 import { Heading, VStack, Text, Box, Wrap, WrapItem, Badge } from "@chakra-ui/react";
 import React from "react";
 
-const Card = ({ title, description, languages }) => {
+const CardExperience = ({ title, description, languages }) => {
   return (
     <VStack 
       bg="white" 
@@ -28,4 +28,4 @@ const Card = ({ title, description, languages }) => {
   );
 };
 
-export default Card;
+export default CardExperience;

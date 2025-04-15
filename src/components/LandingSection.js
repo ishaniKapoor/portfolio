@@ -1,9 +1,9 @@
 // "linear-gradient(135deg,rgb(17, 7, 57) 100%,rgb(16, 32, 54) 0%)"
 
 import React from "react";
-import { Avatar, Heading, VStack, Text, Link, Box, Container, HStack } from "@chakra-ui/react";
+import { Avatar, Heading, Text, Link, Box, Container, HStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { FaBook, FaPlane, FaCat, FaBriefcase, FaMountain } from "react-icons/fa";
+import { FaBook, FaPlane, FaBriefcase, FaMountain } from "react-icons/fa";
 import myPdf from "./../images/IshaniKapoorResume.pdf";
 import FullScreenSection from "./FullScreenSection";
 
@@ -85,7 +85,7 @@ const LandingSection = () => (
             <MotionIcon whileHover="hover" variants={iconVariants}>
               <FaMountain size={24} />
             </MotionIcon>
-            <Text mt={2}>Bouldering at Local Gyms</Text>
+            <Text mt={2}>Bouldering</Text>
           </Box>
 
           <Box>
