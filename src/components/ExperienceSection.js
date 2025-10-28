@@ -1,6 +1,6 @@
 import React from "react";
 import FullScreenSection from "./FullScreenSection";
-import { Heading, VStack } from "@chakra-ui/react";
+import { Heading, VStack, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Box } from "@chakra-ui/react";
 import CardExperience from "./CardExperience";
 import { motion, useReducedMotion } from "framer-motion";
 import "./LandingSection.css";
@@ -33,27 +33,27 @@ const ExperienceSection = () => {
       px={{ base: 4, md: 8, lg: 16 }} 
       p={8}
     >
-      <motion.div
-        initial={shouldReduceMotion ? {} : { opacity: 0, y: -8 }}
-        animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Heading as="h1" id="experience-section" color="white" mb={6} className="name-gradient">
-          Experience
-        </Heading>
-      </motion.div>
+      <Heading as="h1" id="experience-section" color="white" mb={6} className="name-gradient">
+        Experience
+      </Heading>
 
-      <motion.div
-        initial={shouldReduceMotion ? {} : { opacity: 0, y: 12 }}
-        animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.12 }}
-      >
-        <VStack spacing={6} width="100%" maxW="800px">
-          {experiences.map((experience) => (
-            <CardExperience key={experience.title} {...experience} />
-          ))}
-        </VStack>
-      </motion.div>
+      <Accordion allowMultiple width="100%" maxW="840px">
+        {experiences.map((exp, idx) => (
+          <AccordionItem key={exp.title} border="none" mb={4}>
+            <h3>
+              <AccordionButton _expanded={{ bg: "rgba(255,255,255,0.02)" }} borderRadius="md">
+                <Box flex="1" textAlign="left" color="white" fontWeight="600">
+                  {exp.title}
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h3>
+            <AccordionPanel pb={4}>
+              <CardExperience {...exp} />
+            </AccordionPanel>
+          </AccordionItem>
+        ))}
+      </Accordion>
     </FullScreenSection>
   );
 };

@@ -111,6 +111,59 @@
   border: 3px solid rgba(255,255,255,0.06);
 }
 
+.landing-avatar-wrap {
+  display: inline-block;
+  padding: 6px;
+  border-radius: 999px;
+}
+
+/* Limit avatar size and make it responsive */
+.landing-avatar {
+  width: 140px !important;
+  height: 140px !important;
+}
+
+@media (min-width: 768px) {
+  .landing-avatar {
+    width: 200px !important;
+    height: 200px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .landing-avatar {
+    width: 260px !important;
+    height: 260px !important;
+  }
+}
+
+/* Skills row */
+.skills-row {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.skill {
+  width: 120px;
+}
+
+.skill-bar-outer {
+  width: 100%;
+  height: 9px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.skill-bar-inner {
+  height: 100%;
+  background: linear-gradient(90deg, #4fd1c5, #2b6cb0);
+  border-radius: 99px;
+}
+
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .blob {

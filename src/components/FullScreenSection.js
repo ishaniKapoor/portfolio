@@ -16,7 +16,7 @@ const FullScreenSection = ({ children, isDarkBackground, background, backgroundC
       background={bg}
       color={isDarkBackground ? "white" : "black"}
       width="100vw"
-      minHeight="100vh"
+      minHeight="85vh"
       position="relative"
       align="center"
       pt={topPadding}
@@ -29,7 +29,7 @@ const FullScreenSection = ({ children, isDarkBackground, background, backgroundC
         <div className="blob blob-3" />
       </div>
 
-      <VStack className="fullscreen-inner" maxW="1280px" width="100%" minHeight="100vh">
+      <VStack className="fullscreen-inner" maxW="1280px" width="100%" minHeight="85vh">
         {children}
       </VStack>
     </VStack>

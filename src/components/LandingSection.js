@@ -1,7 +1,7 @@
-// "linear-gradient(135deg,rgb(17, 7, 57) 100%,rgb(16, 32, 54) 0%)"
+"use strict";
 
 import React, { useEffect, useState } from "react";
-import { Avatar, Heading, Text, Link, Box, Container, HStack, Button, Tag, VStack } from "@chakra-ui/react";
+import { Avatar, Heading, Text, Box, Container, HStack, Button } from "@chakra-ui/react";
 import { motion, useReducedMotion } from "framer-motion";
 import "./LandingSection.css";
 import { FaBook, FaPlane, FaBriefcase, FaMountain } from "react-icons/fa";
@@ -20,6 +20,7 @@ const iconVariants = {
 const LandingSection = () => {
   const shouldReduceMotion = useReducedMotion();
   const [displayText, setDisplayText] = useState(roles[0]);
+
   useEffect(() => {
     if (shouldReduceMotion) {
       setDisplayText(roles[0]);
@@ -58,124 +59,137 @@ const LandingSection = () => {
 
   return (
     <FullScreenSection
-    justifyContent="center"
-    alignItems="center"
-    isDarkBackground
-    background="linear-gradient(135deg,rgb(17, 7, 57) 100%,rgb(16, 32, 54) 0%)"
-    textAlign="center"
-  width="100vw"
-  minH="75vh"
-    px={{ base: 4, md: 8, lg: 16 }}
-    id="landing-section"
-  >
-    <Container maxW="container.md" centerContent>
-      <motion.div
-        initial={shouldReduceMotion ? {} : { opacity: 0, scale: 0.92 }}
-        animate={shouldReduceMotion ? {} : { opacity: 1, scale: 1 }}
-        transition={{ duration: 0.9 }}
-      >
-        <motion.div whileHover={shouldReduceMotion ? {} : { rotate: -6, scale: 1.06 }} style={{ display: "inline-block" }}>
-          <Avatar
-            name="Ishani Kapoor"
-            src={require("./../images/profile-pic.jpg")}
-            size={{ base: "2xl", md: "3xl" }}
-            mb={4}
-            boxShadow="xl"
-            borderRadius="full"
-            alt="Ishani Kapoor profile"
-            className="landing-avatar"
-          />
-        </motion.div>
-      </motion.div>
-
-      <motion.div
-        initial={shouldReduceMotion ? {} : { opacity: 0, y: -10 }}
-        animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.2 }}
-      >
-        <Heading
-          as="h1"
-          size={{ base: "2xl", md: "4xl", lg: "5xl" }}
-          color="white"
-          fontFamily="serif"
-          mb={2}
-          className="name-gradient"
+      justifyContent="center"
+      alignItems="center"
+      isDarkBackground
+      background="linear-gradient(135deg,rgb(17, 7, 57) 100%,rgb(16, 32, 54) 0%)"
+      textAlign="center"
+      width="100vw"
+      minH="75vh"
+      px={{ base: 4, md: 8, lg: 16 }}
+      id="landing-section"
+    >
+      <Container maxW="container.md" centerContent>
+        <motion.div
+          initial={shouldReduceMotion ? {} : { opacity: 0, scale: 0.92 }}
+          animate={shouldReduceMotion ? {} : { opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9 }}
         >
-          {name}
-        </Heading>
-        <Text fontSize={{ base: "lg", md: "xl" }} color="white" fontFamily="serif" className="typing-line" aria-live="polite">
-          {displayText}
-          <span className="typing-cursor" aria-hidden="true">|</span>
-        </Text>
+          <motion.div whileHover={shouldReduceMotion ? {} : { rotate: -4, scale: 1.02 }} style={{ display: "inline-block" }}>
+            <Box className="landing-avatar-wrap">
+              <Avatar
+                name="Ishani Kapoor"
+                src={require("./../images/profile-pic.jpg")}
+                mb={4}
+                boxShadow="lg"
+                borderRadius="full"
+                alt="Ishani Kapoor profile"
+                className="landing-avatar"
+              />
+            </Box>
+          </motion.div>
+        </motion.div>
 
-        {/* Skill tags to showcase front-end skills */}
-        <VStack mt={4} spacing={2} align="center">
-          <HStack spacing={3} mt={2}>
-            <Tag size="lg" variant="solid" colorScheme="teal">React</Tag>
-            <Tag size="lg" variant="solid" colorScheme="teal">JavaScript</Tag>
-            <Tag size="lg" variant="solid" colorScheme="teal">CSS</Tag>
-            <Tag size="lg" variant="solid" colorScheme="teal">TypeScript</Tag>
-          </HStack>
-        </VStack>
-      </motion.div>
-
-      <motion.div
-        initial={shouldReduceMotion ? {} : { opacity: 0, y: 10 }}
-        animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.45 }}
-      >
-        <HStack spacing={6} mt={4} color="white">
-          <Box>
-            <MotionIcon whileHover="hover" variants={iconVariants}>
-              <FaBook size={24} />
-            </MotionIcon>
-            <Text mt={2}>Reading</Text>
-          </Box>
-
-          <Box>
-            <MotionIcon whileHover="hover" variants={iconVariants}>
-              <FaPlane size={24} />
-            </MotionIcon>
-            <Text mt={2}>Traveling</Text>
-          </Box>
-
-          <Box>
-            <MotionIcon whileHover="hover" variants={iconVariants}>
-              <FaMountain size={24} />
-            </MotionIcon>
-            <Text mt={2}>Bouldering</Text>
-          </Box>
-
-          <Box>
-            <MotionIcon whileHover="hover" variants={iconVariants}>
-              <FaBriefcase size={24} />
-            </MotionIcon>
-            <Text mt={2}>Frontend Development</Text>
-          </Box>
-        </HStack>
-      </motion.div>
-
-      <motion.div
-        initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
-        animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.7 }}
-      >
-        <Box mt={6} display="flex" gap={4} justifyContent="center">
-          <Button
-            as="a"
-            href={myPdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            size="lg"
-            colorScheme="teal"
-            bgGradient="linear(to-r, teal.400, teal.600)"
-            _hover={{ transform: "translateY(-3px)", boxShadow: "lg" }}
+        <motion.div
+          initial={shouldReduceMotion ? {} : { opacity: 0, y: -10 }}
+          animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.2 }}
+        >
+          <Heading
+            as="h1"
+            fontSize={{ base: "2.2rem", md: "3rem", lg: "4rem" }}
+            color="white"
+            fontFamily="serif"
+            mb={2}
+            className="name-gradient"
           >
-            📄 View Resume
-          </Button>
-        </Box>
-      </motion.div>
-    </Container>
+            {name}
+          </Heading>
+          <Text fontSize={{ base: "1rem", md: "1.2rem" }} color="white" fontFamily="serif" className="typing-line">
+            {displayText}
+            <span className="typing-cursor" aria-hidden="true">|</span>
+          </Text>
+
+          {/* Skills row */}
+          <Box mt={4} className="skills-row">
+            {[
+              { name: "React", pct: 90 },
+              { name: "JavaScript", pct: 88 },
+              { name: "CSS", pct: 80 },
+              { name: "TypeScript", pct: 60 },
+            ].map((skill) => (
+              <Box key={skill.name} className="skill">
+                <Text fontSize="sm" color="#d1e7df" mb={1} textAlign="center">{skill.name}</Text>
+                <div className="skill-bar-outer" aria-hidden>
+                  <motion.div
+                    className="skill-bar-inner"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${skill.pct}%` }}
+                    transition={{ duration: 1.2 }}
+                  />
+                </div>
+              </Box>
+            ))}
+          </Box>
+        </motion.div>
+
+        <motion.div
+          initial={shouldReduceMotion ? {} : { opacity: 0, y: 12 }}
+          animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.45 }}
+        >
+          <HStack spacing={6} mt={4} color="white">
+            <Box>
+              <MotionIcon whileHover="hover" variants={iconVariants}>
+                <FaBook size={24} />
+              </MotionIcon>
+              <Text mt={2}>Reading</Text>
+            </Box>
+
+            <Box>
+              <MotionIcon whileHover="hover" variants={iconVariants}>
+                <FaPlane size={24} />
+              </MotionIcon>
+              <Text mt={2}>Traveling</Text>
+            </Box>
+
+            <Box>
+              <MotionIcon whileHover="hover" variants={iconVariants}>
+                <FaMountain size={24} />
+              </MotionIcon>
+              <Text mt={2}>Bouldering</Text>
+            </Box>
+
+            <Box>
+              <MotionIcon whileHover="hover" variants={iconVariants}>
+                <FaBriefcase size={24} />
+              </MotionIcon>
+              <Text mt={2}>Frontend Development</Text>
+            </Box>
+          </HStack>
+        </motion.div>
+
+        <motion.div
+          initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
+          animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.7 }}
+        >
+          <Box mt={6} display="flex" gap={4} justifyContent="center">
+            <Button
+              as="a"
+              href={myPdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              size="lg"
+              colorScheme="teal"
+              bgGradient="linear(to-r, teal.400, teal.600)"
+              _hover={{ transform: "translateY(-3px)", boxShadow: "lg" }}
+            >
+              📄 View Resume
+            </Button>
+          </Box>
+        </motion.div>
+      </Container>
     </FullScreenSection>
   );
 };
