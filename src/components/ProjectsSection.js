@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import FullScreenSection from "./FullScreenSection";
-import { Heading, Container, Box } from "@chakra-ui/react";
+import { Heading, Container, Box, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Text, Link as ChakraLink, Button as ChakraButton } from "@chakra-ui/react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import "./ProjectsSection.css";
@@ -31,6 +31,13 @@ const ProjectsSection = () => {
   ];
 
   const shouldReduceMotion = useReducedMotion();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selected, setSelected] = useState(null);
+
+  const openProject = (project) => {
+    setSelected(project);
+    onOpen();
+  };
 
   return (
     <FullScreenSection
@@ -69,22 +76,53 @@ const ProjectsSection = () => {
                 <Card.Body>
                   <Card.Title>{project.title}</Card.Title>
                   <Card.Text>{project.body}</Card.Text>
-                  {project.link && (
-                    <Button
-                      variant="primary"
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View Project
-                    </Button>
-                  )}
+                  <div style={{ display: "flex", gap: 8 }}>
+                    {project.link && (
+                      <Button
+                        variant="primary"
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Open Link
+                      </Button>
+                    )}
+
+                    <ChakraButton colorScheme="teal" onClick={() => openProject(project)}>
+                      View Details
+                    </ChakraButton>
+                  </div>
                 </Card.Body>
               </Card>
             </motion.div>
           ))}
         </Box>
       </Container>
+      {/* Project details modal */}
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent bg="gray.800" color="white">
+          <ModalHeader>{selected?.title}</ModalHeader>
+          <ModalBody>
+            <Text mb={4}>{selected?.body}</Text>
+            {selected?.link && (
+              <ChakraLink href={selected.link} isExternal color="teal.200">
+                Open project link
+              </ChakraLink>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <ChakraButton variant="ghost" mr={3} onClick={onClose}>
+              Close
+            </ChakraButton>
+            {selected?.link && (
+              <ChakraButton colorScheme="teal" as="a" href={selected.link} target="_blank" rel="noopener noreferrer">
+                Open Link
+              </ChakraButton>
+            )}
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </FullScreenSection>
   );
 };

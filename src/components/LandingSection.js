@@ -1,7 +1,7 @@
 // "linear-gradient(135deg,rgb(17, 7, 57) 100%,rgb(16, 32, 54) 0%)"
 
 import React, { useEffect, useState } from "react";
-import { Avatar, Heading, Text, Link, Box, Container, HStack, Button } from "@chakra-ui/react";
+import { Avatar, Heading, Text, Link, Box, Container, HStack, Button, Tag, VStack } from "@chakra-ui/react";
 import { motion, useReducedMotion } from "framer-motion";
 import "./LandingSection.css";
 import { FaBook, FaPlane, FaBriefcase, FaMountain } from "react-icons/fa";
@@ -63,24 +63,24 @@ const LandingSection = () => {
     isDarkBackground
     background="linear-gradient(135deg,rgb(17, 7, 57) 100%,rgb(16, 32, 54) 0%)"
     textAlign="center"
-    width="100vw"
-    minH="100vh"
+  width="100vw"
+  minH="75vh"
     px={{ base: 4, md: 8, lg: 16 }}
     id="landing-section"
   >
     <Container maxW="container.md" centerContent>
       <motion.div
-        initial={shouldReduceMotion ? {} : { opacity: 0, scale: 0.9 }}
+        initial={shouldReduceMotion ? {} : { opacity: 0, scale: 0.92 }}
         animate={shouldReduceMotion ? {} : { opacity: 1, scale: 1 }}
         transition={{ duration: 0.9 }}
       >
-        <motion.div whileHover={{ rotate: -6, scale: 1.03 }} style={{ display: "inline-block" }}>
+        <motion.div whileHover={shouldReduceMotion ? {} : { rotate: -6, scale: 1.06 }} style={{ display: "inline-block" }}>
           <Avatar
             name="Ishani Kapoor"
             src={require("./../images/profile-pic.jpg")}
-            size={{ base: "xl", md: "2xl" }}
+            size={{ base: "2xl", md: "3xl" }}
             mb={4}
-            boxShadow="lg"
+            boxShadow="xl"
             borderRadius="full"
             alt="Ishani Kapoor profile"
             className="landing-avatar"
@@ -95,7 +95,7 @@ const LandingSection = () => {
       >
         <Heading
           as="h1"
-          size={{ base: "xl", md: "2xl", lg: "3xl" }}
+          size={{ base: "2xl", md: "4xl", lg: "5xl" }}
           color="white"
           fontFamily="serif"
           mb={2}
@@ -103,10 +103,20 @@ const LandingSection = () => {
         >
           {name}
         </Heading>
-        <Text fontSize={{ base: "lg", md: "xl" }} color="white" fontFamily="serif" className="typing-line">
+        <Text fontSize={{ base: "lg", md: "xl" }} color="white" fontFamily="serif" className="typing-line" aria-live="polite">
           {displayText}
           <span className="typing-cursor" aria-hidden="true">|</span>
         </Text>
+
+        {/* Skill tags to showcase front-end skills */}
+        <VStack mt={4} spacing={2} align="center">
+          <HStack spacing={3} mt={2}>
+            <Tag size="lg" variant="solid" colorScheme="teal">React</Tag>
+            <Tag size="lg" variant="solid" colorScheme="teal">JavaScript</Tag>
+            <Tag size="lg" variant="solid" colorScheme="teal">CSS</Tag>
+            <Tag size="lg" variant="solid" colorScheme="teal">TypeScript</Tag>
+          </HStack>
+        </VStack>
       </motion.div>
 
       <motion.div
