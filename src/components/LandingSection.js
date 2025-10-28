@@ -1,14 +1,15 @@
 // "linear-gradient(135deg,rgb(17, 7, 57) 100%,rgb(16, 32, 54) 0%)"
 
-import React from "react";
-import { Avatar, Heading, Text, Link, Box, Container, HStack } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { Avatar, Heading, Text, Link, Box, Container, HStack, Button } from "@chakra-ui/react";
+import { motion, useReducedMotion } from "framer-motion";
+import "./LandingSection.css";
 import { FaBook, FaPlane, FaBriefcase, FaMountain } from "react-icons/fa";
 import myPdf from "./../images/IshaniKapoorResume.pdf";
 import FullScreenSection from "./FullScreenSection";
 
 const name = "Ishani Kapoor";
-const title = "Full Stack Developer";
+const roles = ["Full Stack Developer", "React Developer", "UI/UX Enthusiast"];
 
 const MotionIcon = motion(Box);
 
@@ -16,8 +17,47 @@ const iconVariants = {
   hover: { scale: 1.2, rotate: 5, transition: { duration: 0.3 } },
 };
 
-const LandingSection = () => (
-  <FullScreenSection
+const LandingSection = () => {
+  const shouldReduceMotion = useReducedMotion();
+  const [displayText, setDisplayText] = useState(roles[0]);
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setDisplayText(roles[0]);
+      return;
+    }
+
+    let roleIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+    let timeout;
+
+    const tick = () => {
+      const current = roles[roleIndex];
+      if (!deleting) {
+        charIndex += 1;
+        setDisplayText(current.slice(0, charIndex));
+        if (charIndex === current.length) {
+          deleting = true;
+          timeout = setTimeout(tick, 1200);
+          return;
+        }
+      } else {
+        charIndex -= 1;
+        setDisplayText(current.slice(0, charIndex));
+        if (charIndex === 0) {
+          deleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+        }
+      }
+      timeout = setTimeout(tick, deleting ? 60 : 120);
+    };
+
+    timeout = setTimeout(tick, 500);
+    return () => clearTimeout(timeout);
+  }, [shouldReduceMotion]);
+
+  return (
+    <FullScreenSection
     justifyContent="center"
     alignItems="center"
     isDarkBackground
@@ -28,43 +68,57 @@ const LandingSection = () => (
     px={{ base: 4, md: 8, lg: 16 }}
     id="landing-section"
   >
+    {/* decorative animated blobs behind content */}
+    <div className="landing-blobs" aria-hidden="true">
+      <div className="blob blob-1" />
+      <div className="blob blob-2" />
+      <div className="blob blob-3" />
+    </div>
     <Container maxW="container.md" centerContent>
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }} 
-        animate={{ opacity: 1, scale: 1 }} 
-        transition={{ duration: 1 }}
+      <motion.div
+        initial={shouldReduceMotion ? {} : { opacity: 0, scale: 0.9 }}
+        animate={shouldReduceMotion ? {} : { opacity: 1, scale: 1 }}
+        transition={{ duration: 0.9 }}
       >
-        <Avatar 
-          name="Ishani Kapoor" 
-          src={require("./../images/profile-pic.jpg")} 
-          size={{ base: "xl", md: "2xl" }}
-          mb={4}
-        />
+        <motion.div whileHover={{ rotate: -6, scale: 1.03 }} style={{ display: "inline-block" }}>
+          <Avatar
+            name="Ishani Kapoor"
+            src={require("./../images/profile-pic.jpg")}
+            size={{ base: "xl", md: "2xl" }}
+            mb={4}
+            boxShadow="lg"
+            borderRadius="full"
+            alt="Ishani Kapoor profile"
+            className="landing-avatar"
+          />
+        </motion.div>
       </motion.div>
 
-      <motion.div 
-        initial={{ opacity: 0, y: -10 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 1, delay: 0.3 }}
+      <motion.div
+        initial={shouldReduceMotion ? {} : { opacity: 0, y: -10 }}
+        animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.2 }}
       >
-        <Heading 
-          as="h1" 
-          size={{ base: "xl", md: "2xl", lg: "3xl" }} 
+        <Heading
+          as="h1"
+          size={{ base: "xl", md: "2xl", lg: "3xl" }}
           color="white"
           fontFamily="serif"
           mb={2}
+          className="name-gradient"
         >
           {name}
         </Heading>
-        <Text fontSize={{ base: "lg", md: "xl" }} color="white" fontFamily="serif">
-          {title}
+        <Text fontSize={{ base: "lg", md: "xl" }} color="white" fontFamily="serif" className="typing-line">
+          {displayText}
+          <span className="typing-cursor" aria-hidden="true">|</span>
         </Text>
       </motion.div>
 
-      <motion.div 
-        initial={{ opacity: 0, y: 10 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 1, delay: 0.6 }}
+      <motion.div
+        initial={shouldReduceMotion ? {} : { opacity: 0, y: 10 }}
+        animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.45 }}
       >
         <HStack spacing={6} mt={4} color="white">
           <Box>
@@ -97,30 +151,41 @@ const LandingSection = () => (
         </HStack>
       </motion.div>
 
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 1, delay: 0.9 }}
+      <motion.div
+        initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
+        animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.7 }}
       >
-        <Box mt={5}>
-          <Link
+        <Box mt={6} display="flex" gap={4} justifyContent="center">
+          <Button
+            as="a"
             href={myPdf}
-            isExternal
-            fontSize={{ base: "md", md: "lg" }}
-            fontWeight="bold"
-            color="white"
-            bg="linear-gradient(135deg,rgb(39, 123, 112) 100%,rgb(50, 124, 96) 0%)"
-            px={6}
-            py={3}
-            borderRadius="md"
-            _hover={{ bg: "linear-gradient(135deg,rgb(44, 130, 118) 100%,rgb(50, 124, 96) 0%)", textDecoration: "none" }}
+            target="_blank"
+            rel="noopener noreferrer"
+            size="lg"
+            colorScheme="teal"
+            bgGradient="linear(to-r, teal.400, teal.600)"
+            _hover={{ transform: "translateY(-3px)", boxShadow: "lg" }}
           >
-            📄 View My Resume
-          </Link>
+            📄 View Resume
+          </Button>
+
+          <Button
+            as="a"
+            href="#contact"
+            size="lg"
+            variant="outline"
+            color="white"
+            borderColor="rgba(255,255,255,0.3)"
+            _hover={{ bg: "rgba(255,255,255,0.04)" }}
+          >
+            ✉️ Contact Me
+          </Button>
         </Box>
       </motion.div>
     </Container>
-  </FullScreenSection>
-);
+    </FullScreenSection>
+  );
+};
 
 export default LandingSection;
