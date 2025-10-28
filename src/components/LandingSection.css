@@ -65,7 +65,7 @@
 }
 
 /* Ensure content sits above blobs */
-#landing-section .chakra-container {
+.fullscreen-inner {
   position: relative;
   z-index: 1;
 }

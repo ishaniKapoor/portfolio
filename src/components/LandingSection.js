@@ -68,12 +68,6 @@ const LandingSection = () => {
     px={{ base: 4, md: 8, lg: 16 }}
     id="landing-section"
   >
-    {/* decorative animated blobs behind content */}
-    <div className="landing-blobs" aria-hidden="true">
-      <div className="blob blob-1" />
-      <div className="blob blob-2" />
-      <div className="blob blob-3" />
-    </div>
     <Container maxW="container.md" centerContent>
       <motion.div
         initial={shouldReduceMotion ? {} : { opacity: 0, scale: 0.9 }}
