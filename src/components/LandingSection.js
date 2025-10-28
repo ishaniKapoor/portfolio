@@ -169,18 +169,6 @@ const LandingSection = () => {
           >
             📄 View Resume
           </Button>
-
-          <Button
-            as="a"
-            href="#contact"
-            size="lg"
-            variant="outline"
-            color="white"
-            borderColor="rgba(255,255,255,0.3)"
-            _hover={{ bg: "rgba(255,255,255,0.04)" }}
-          >
-            ✉️ Contact Me
-          </Button>
         </Box>
       </motion.div>
     </Container>
