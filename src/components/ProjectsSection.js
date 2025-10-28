@@ -4,6 +4,8 @@ import { Heading, Container, Box } from "@chakra-ui/react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import "./ProjectsSection.css";
+import { motion, useReducedMotion } from "framer-motion";
+import "./LandingSection.css";
 
 const ProjectsSection = () => {
   const projects = [
@@ -28,6 +30,8 @@ const ProjectsSection = () => {
     }
   ];
 
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <FullScreenSection
       justifyContent="center"
@@ -42,30 +46,42 @@ const ProjectsSection = () => {
       id="projects-section"
     >
       <Container maxW="container.xl" centerContent>
-        <Heading as="h1" color="white" mb={10}>
-          Projects
-        </Heading>
+        <motion.div
+          initial={shouldReduceMotion ? {} : { opacity: 0, y: -8 }}
+          animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.85 }}
+        >
+          <Heading as="h1" color="white" mb={10} className="name-gradient">
+            Projects
+          </Heading>
+        </motion.div>
+
         <Box className="gallery-grid">
           {projects.map((project, i) => (
-            <Card
+            <motion.div
               key={i}
-              className={`gallery-card`}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -6 }}
+              initial={shouldReduceMotion ? {} : { opacity: 0, y: 12 }}
+              animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.08 }}
             >
-              <Card.Body>
-                <Card.Title>{project.title}</Card.Title>
-                <Card.Text>{project.body}</Card.Text>
-                {project.link && (
-                  <Button
-                    variant="primary"
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Project
-                  </Button>
-                )}
-              </Card.Body>
-            </Card>
+              <Card className={`gallery-card`}>
+                <Card.Body>
+                  <Card.Title>{project.title}</Card.Title>
+                  <Card.Text>{project.body}</Card.Text>
+                  {project.link && (
+                    <Button
+                      variant="primary"
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Project
+                    </Button>
+                  )}
+                </Card.Body>
+              </Card>
+            </motion.div>
           ))}
         </Box>
       </Container>
