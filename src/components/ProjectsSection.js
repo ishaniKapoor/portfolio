@@ -22,9 +22,9 @@ const ProjectsSection = () => {
       link: "https://github.com/ishaniKapoor/RepHairations"
     },
     {
-      title: "Reserve a table",
-      body: "Developed a reserve a table functionality from Figma design to implementation as part of my Front-end Development course.", 
-      link: "https://github.com/ishaniKapoor/little-lemon-reserve-a-table"
+      title: "Personal Finance Manager",
+      body: "Was tired of thinking about paying a service/app to track and maintain my finances! Built my own", 
+      link: "https://github.com/ishaniKapoor/personalFinanceManager"
     }
   ];
 
