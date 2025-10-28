@@ -70,6 +70,18 @@
   z-index: 1;
 }
 
+/* Ensure that anchors scroll to a position below the fixed header */
+#landing-section,
+#experience-section,
+#projects-section {
+  scroll-margin-top: 88px; /* slight buffer above content */
+}
+
+/* Also make sure the inner content has a small top gap so avatar/heading isn't flush */
+.fullscreen-inner > * {
+  margin-top: 8px;
+}
+
 .name-gradient {
   background: linear-gradient(90deg, #fff 0%, #ffd6e0 30%, #a7f3d0 70%);
   -webkit-background-clip: text;

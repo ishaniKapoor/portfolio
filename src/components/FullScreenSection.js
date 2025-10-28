@@ -5,8 +5,11 @@ import "./LandingSection.css";
 // FullScreenSection ensures the background covers the full viewport width/height
 // while keeping children constrained to a centered max width. It also renders
 // decorative blobs that span the full area so each section looks cohesive.
-const FullScreenSection = ({ children, isDarkBackground, background, backgroundColor, ...boxProps }) => {
+const FullScreenSection = ({ children, isDarkBackground, background, backgroundColor, pt, paddingTop, ...boxProps }) => {
   const bg = background || backgroundColor || null;
+  // Respect any explicit top padding passed in; otherwise use 80px to avoid being
+  // overlapped by the fixed header.
+  const topPadding = pt || paddingTop || "80px";
 
   return (
     <VStack
@@ -16,6 +19,7 @@ const FullScreenSection = ({ children, isDarkBackground, background, backgroundC
       minHeight="100vh"
       position="relative"
       align="center"
+      pt={topPadding}
       {...boxProps}
     >
       {/* decorative animated blobs behind content for every section */}
